@@ -7,7 +7,7 @@
     "svrx-plugin"
   ],
   "engines": {
-    "svrx": "^0.1.0"
+    "svrx": "~0.0"
   },
   "homepage": "https://svrx.gitbook.io/docs/",
   "license": "MIT",
