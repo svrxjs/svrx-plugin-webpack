@@ -129,7 +129,7 @@ module.exports = {
     },
     client: {
       type: 'object',
-      description: 'Enable webpack Hot Module Replacement feature',
+      description: 'Configuration options can be passed to the client by adding querystring parameters to the path in the webpack config',
     },
     path: {
       type: 'string',
