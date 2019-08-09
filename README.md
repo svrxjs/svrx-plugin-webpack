@@ -31,7 +31,7 @@ svrx({
         options: {
             hot: false
         }
-    ]
+    }]
 }).start();
 ```
 
