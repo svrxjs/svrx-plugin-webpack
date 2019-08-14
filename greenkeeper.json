@@ -1,0 +1,11 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "example/react-loader/package.json",
+        "example/simple/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
