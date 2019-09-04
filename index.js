@@ -15,9 +15,7 @@ const NOT_VALID_VERSION = Symbol('NOT_VALID_VERSION');
 
 function getRealClientEntry(config) {
   try {
-    return nodeResolve
-      .sync(CLIENT_ENTRY, { basedir: config.getInfo().path })
-      .replace(/\.js$/, '');
+    return nodeResolve.sync(CLIENT_ENTRY, { basedir: config.getInfo().path }).replace(/\.js$/, '');
   } catch (e) {
     // fallback to relative entry
     return CLIENT_ENTRY;
@@ -107,20 +105,23 @@ function prepareConfig(webpackConfig, logger, webpack, config) {
       plugins.push(new webpack.NamedModulesPlugin());
     }
   }
-  webpackConfig.entry = prepareEntry(
-    webpackConfig.entry,
-    webpackConfig,
-    config,
-  );
+  webpackConfig.entry = prepareEntry(webpackConfig.entry, webpackConfig, config);
   return webpackConfig;
 }
 
 module.exports = {
   configSchema: {
-    file: {
-      type: 'string',
-      description:
-        'webpack config file, default using webpack.config.js in root',
+    config: {
+      description: 'webpack config file or object, default using webpack.config.js in root',
+      default: 'webpack.config.js',
+      anyOf: [
+        {
+          type: 'string',
+        },
+        {
+          type: 'object',
+        },
+      ],
     },
     hot: {
       type: 'boolean',
@@ -129,12 +130,12 @@ module.exports = {
     },
     client: {
       type: 'object',
-      description: 'Configuration options can be passed to the client by adding querystring parameters to the path in the webpack config',
+      description:
+        'Configuration options can be passed to the client by adding querystring parameters to the path in the webpack config',
     },
     path: {
       type: 'string',
-      description:
-        'The path which the middleware will serve the event stream on',
+      description: 'The path which the middleware will serve the event stream on',
     },
   },
   hooks: {
@@ -148,20 +149,26 @@ module.exports = {
       let localWebpackConfig;
       const root = config.get('$.root');
 
-      const configFile = libPath.resolve(
-        root,
-        config.get('file') || 'webpack.config.js',
-      );
-
+      const configParam = config.get('config');
+      let configFile;
+      if (typeof configParam === 'string') {
+        configFile = libPath.resolve(root, configParam || 'webpack.config.js');
+        try {
+          localWebpackConfig = require(configFile);
+        } catch (e) {
+          logger.error(`load config file failed at ${configFile}\n${e.stack}`);
+          process.exit(0);
+        }
+      } else if (configParam && typeof configParam === 'object') {
+        localWebpackConfig = configParam;
+      }
       try {
         webpack = await new Promise((resolve, reject) => {
           nodeResolve('webpack', { basedir: root }, (err, res, pkg) => {
             if (err) return reject(err);
             if (!semver.satisfies(pkg.version, WEBPACK_VERSION)) {
               const errObj = new Error(
-                `local webpack.version [${
-                  pkg.version
-                }] is not satisfies plugin-webpack: ${WEBPACK_VERSION}`,
+                `local webpack.version [${pkg.version}] is not satisfies plugin-webpack: ${WEBPACK_VERSION}`,
               );
               errObj.code = NOT_VALID_VERSION;
               reject(errObj);
@@ -176,26 +183,15 @@ module.exports = {
         }
         webpack = pluginWebpack;
         logger.warn(
-          `load localwebpack from (${root}) failed, use webpack@${
-            webpack.version
-          } instead`,
+          `load localwebpack from (${root}) failed, use webpack@${webpack.version} instead`,
         );
-      }
-
-      try {
-        localWebpackConfig = require(configFile);
-      } catch (e) {
-        logger.error(`load config file failed at ${configFile}\n${e.stack}`);
-        process.exit(0);
       }
 
       if (typeof localWebpackConfig === 'function') {
         localWebpackConfig = localWebpackConfig('', { mode: 'development' });
       }
 
-      const compiler = webpack(
-        prepareConfig(localWebpackConfig, logger, webpack, config),
-      );
+      const compiler = webpack(prepareConfig(localWebpackConfig, logger, webpack, config));
 
       // process local webpack config
 
@@ -212,9 +208,7 @@ module.exports = {
           dataToBeRecycle.modules = stats
             .toJson()
             .modules.map(m => m.id)
-            .filter(
-              id => typeof id === 'string' && id.indexOf('node_modules') === -1,
-            )
+            .filter(id => typeof id === 'string' && id.indexOf('node_modules') === -1)
             .map(normalizeResource.bind(null, compiler.context));
 
           return handler(err, stats);

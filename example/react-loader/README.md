@@ -6,10 +6,10 @@ React Loader Example for Svrx
 ### **cli way**
 
 ```bash
-svrx --webpack?file=custom.webpack.config.js
+svrx --webpack?config=custom.webpack.config.js
 ```
 
-> default file is `webpack.config.js`
+> default config file is `webpack.config.js` in pwd
 
 you can also keep the param in `.svrxrc` file
 
@@ -28,7 +28,7 @@ svrx({
   plugins: [{
       name: 'webpack',
       options: {
-          file: './custom.webpack.config.js'
+          config: './custom.webpack.config.js'
       }
   }],
 }).start();
