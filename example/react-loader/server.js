@@ -4,7 +4,7 @@ svrx({
   plugins: [{
       name: 'webpack',
       options: {
-          file: './custom.webpack.config.js'
+          config: './custom.webpack.config.js'
       }
   }],
 }).start();

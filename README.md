@@ -31,15 +31,15 @@ svrx({
         options: {
             hot: false
         }
-    }]
+    ]
 }).start();
 ```
 
 ## Options
 
-### **file \[String]:** 
+### **config \[String|Object]:** 
 
-webpack config file, default is `$root/webpack.config.js` (`$root` means `options.root`)
+webpack config file or object, default is `$root/webpack.config.js` (`$root` means `options.root`)
 
 ### **hot \[Boolean]:** 
 
