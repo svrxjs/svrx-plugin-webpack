@@ -31,11 +31,7 @@ svrx({
         options: {
             hot: false
         }
-<<<<<<< HEAD
-    ]
-=======
     }]
->>>>>>> 1f0b9ed099a7e77978c092ae75be70aca0895cc9
 }).start();
 ```
 

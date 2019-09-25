@@ -57,6 +57,8 @@ function prepareEntry(entry, webpackConfig, config) {
   if (path) {
     clientConfig.path = path;
   }
+  clientConfig.reload = true;
+
   const realClientEntry = getRealClientEntry(config);
   const qs = querystring.encode(clientConfig);
   const hotEntry = `${realClientEntry}${qs ? `?${qs}` : ''}`;
@@ -88,7 +90,6 @@ function prepareConfig(webpackConfig, logger, webpack, config) {
   const plugins = webpackConfig.plugins || (webpackConfig.plugins = []);
   const { hasHMR, hasNM } = plugins.reduce((flags, p) => {
     if (p instanceof webpack.HotModuleReplacementPlugin) {
-      config.set('hot', true);
       flags.hasHMR = true;
     }
     if (p instanceof webpack.NamedModulesPlugin) {
