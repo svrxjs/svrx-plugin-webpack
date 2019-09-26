@@ -208,8 +208,8 @@ module.exports = {
           dataToBeRecycle.stats = stats;
           dataToBeRecycle.modules = stats
             .toJson()
-            .modules.map(m => m.id)
-            .filter(id => typeof id === 'string' && id.indexOf('node_modules') === -1)
+            .modules.map((m) => m.id)
+            .filter((id) => typeof id === 'string' && id.indexOf('node_modules') === -1)
             .map(normalizeResource.bind(null, compiler.context));
 
           return handler(err, stats);
