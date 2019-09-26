@@ -8,13 +8,16 @@
     "svrx-plugin",
     "webpack"
   ],
+  "files": [
+    "index.js",
+    "README.md"
+  ],
   "engines": {
     "svrx": "^1.0.0"
   },
   "author": "leeluolee <87399126@163.com>",
   "scripts": {
-    "start": "node ./example/start.js",
-    "test": "mocha",
+    "test": "mocha __tests__",
     "lint": "eslint \"**/*.js\"",
     "lint:fix": "eslint \"**/*.js\" --fix",
     "prepublishOnly": "npm run lint && npm run test"
@@ -30,8 +33,6 @@
   },
   "devDependencies": {
     "@svrx/eslint-config": "^1.0.0",
-    "chai": "^4.2.0",
-    "chai-json-schema": "^1.5.1",
     "coveralls": "^3.0.0",
     "eslint": "^6.2.0",
     "expect.js": "^0.3.1",

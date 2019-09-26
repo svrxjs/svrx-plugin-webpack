@@ -3,7 +3,7 @@
 [![svrx](https://img.shields.io/badge/svrx-plugin-%23ff69b4?style=flat-square)](https://svrx.io/)
 [![npm](https://img.shields.io/npm/v/svrx-plugin-webpack.svg?style=flat-square)](https://www.npmjs.com/package/svrx-plugin-webpack)
 
-webpack plugin for [svrx](https://github.com/x-orpheus/svrx)
+[svrx](https://github.com/x-orpheus/svrx) plugin for [webpack](https://webpack.js.org/)
 
 ## Usage
 
@@ -13,13 +13,13 @@ webpack plugin for [svrx](https://github.com/x-orpheus/svrx)
 ### Via CLI
 
 ```bash
-svrx -p webpack?hot=false
+svrx -p "webpack"
 ```
 
 ### Via API
 
 ```js
-const svrx = require('svrx');
+const svrx = require('@svrx/svrx');
 
 svrx({ plugins: ['webpack'] }).start();
 ```
@@ -40,15 +40,15 @@ svrx({
 
 ## Options
 
-### **config \[String|Object]:** 
+#### **config \[String|Object]:** 
 
 webpack config file or object, default is `$root/webpack.config.js` (`$root` means `options.root`)
 
-### **hot \[Boolean]:** 
+#### **hot \[Boolean]:** 
 
 Enable webpack Hot Module Replacement feature, default is `true`
 
-### **client \[Object]:**
+#### **client \[Object]:**
 
 options can be passed to the client by adding querystring parameters to the path in the webpack config
 
@@ -56,7 +56,7 @@ see [webpack-hot-middleware#client](https://github.com/webpack-contrib/webpack-h
 
 for example, options `{timeout: 3000}` will been encode as `webpack-hot-middleware/client?timeout=3000` 
 
-### **path \[String]:**
+#### **path \[String]:**
 
 The path which the middleware will serve the event stream on, default is `/__webpack_hmr`
 
