@@ -1,19 +1,22 @@
 # svrx-plugin-webpack
 
+[![svrx](https://img.shields.io/badge/svrx-plugin-%23ff69b4?style=flat-square)](https://svrx.io/)
+[![npm](https://img.shields.io/npm/v/svrx-plugin-webpack.svg?style=flat-square)](https://www.npmjs.com/package/svrx-plugin-webpack)
+
 webpack plugin for [svrx](https://github.com/x-orpheus/svrx)
 
 ## Usage
 
-> **please confirm you have [installed svrx](https://github.com/x-orpheus/svrx) already**
+> Please make sure that you have installed [svrx](https://svrx.io/) already.
 
 
-### cli
+### Via CLI
 
 ```bash
 svrx -p webpack?hot=false
 ```
 
-### manual
+### Via API
 
 ```js
 const svrx = require('svrx');
@@ -31,7 +34,7 @@ svrx({
         options: {
             hot: false
         }
-    ]
+    }]
 }).start();
 ```
 
@@ -62,6 +65,8 @@ The path which the middleware will serve the event stream on, default is `/__web
 
 - [simple](https://github.com/x-orpheus/svrx-plugin-webpack/tree/master/example/simple)
 - [react-loader](https://github.com/x-orpheus/svrx-plugin-webpack/tree/master/example/react-loader)
+- [integrated-with-create-react-app](https://github.com/x-orpheus/svrx-plugin-webpack/tree/master/example/create-react-app)
 
-## FAQ
+## License
 
+MIT
