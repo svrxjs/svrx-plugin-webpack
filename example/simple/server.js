@@ -1,4 +1,4 @@
-const svrx = require('svrx');
+const svrx = require('@svrx/svrx');
 
 svrx({
   plugins: [

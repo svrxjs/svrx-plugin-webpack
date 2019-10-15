@@ -19,7 +19,7 @@ node server.js
 where in `server.js`
 
 ```js
-const svrx = require('svrx');
+const svrx = require('@svrx/svrx');
 
 svrx({
   plugins: [

@@ -4,7 +4,7 @@ import Counter from './Counter';
 
 const App = () => (
   <h1>
-    Hello, Friend  <br />
+    Hello Svrx  <br />
     <Counter />
   </h1>
 );
