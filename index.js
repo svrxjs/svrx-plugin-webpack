@@ -7,7 +7,7 @@ const pluginWebpack = require('webpack');
 const nodeResolve = require('resolve');
 const compose = require('koa-compose');
 const semver = require('semver');
-const { c2k } = require('svrx-util');
+const { c2k } = require('@svrx/util');
 const libPath = require('path');
 
 const CLIENT_ENTRY = 'webpack-hot-middleware/client';

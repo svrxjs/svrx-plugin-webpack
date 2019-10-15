@@ -1,6 +1,6 @@
 {
   "name": "svrx-plugin-webpack",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The svrx plugin for webpack",
   "main": "index.js",
   "keywords": [
